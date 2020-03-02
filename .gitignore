@@ -2,6 +2,7 @@
 **/target/
 **/pkg/
 **/.cache/
+**/.old/
 
 /dist
 **/wasm-pack.log

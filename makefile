@@ -1,11 +1,13 @@
 .DEFAULT_GOAL: w.build
 w.build: deps
 	rm -rf dist/ .cache/ed25519**/
-	# wasm-pack --verbose build --out-name index --out-dir ../.cache/ed25519wars rust2
+	wasm-pack --verbose build --out-name index --out-dir ../.cache/ed25519wars rust
+	 node node_modules/.bin/webpack
 dev: w.build
 	node node_modules/.bin/webpack-dev-server --open -d
 test:
-	cargo test && wasm-pack test --headless
+	cargo test 
+	# wasm-pack test --headless --chrome rust2
 
 
 # DEPS
@@ -19,4 +21,4 @@ install-rust: 		# install manually: build-essential, pkg-config
 s = 2>&1 >/dev/null
 
 rm.cache:
-	rm -rf node_modules/ package-lock.json rust2/target/ target/
+	rm -rf node_modules/ package-lock.json rust/target rust2/target/ target/

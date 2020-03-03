@@ -2,12 +2,13 @@
 w.build: deps
 	rm -rf dist/ .cache/ed25519**/
 	wasm-pack --verbose build --out-name index --out-dir ../.cache/ed25519wars rust
-	 node node_modules/.bin/webpack
+	# npm run inline
+	node node_modules/.bin/webpack
 dev: w.build
 	node node_modules/.bin/webpack-dev-server --open -d
 test:
 	cargo test 
-	# wasm-pack test --headless --chrome rust2
+	# wasm-pack test --headless --chrome rust
 
 
 # DEPS

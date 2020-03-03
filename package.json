@@ -2,6 +2,8 @@
   "author": "You <you@example.com>",
   "name": "rust-webpack-template",
   "version": "0.1.0",
+  "main":"dist/index.js",
+  "files":["dist"],
   "scripts": {
     "build": "rimraf dist pkg && webpack",
     "start": "rimraf dist pkg && webpack-dev-server --open -d",

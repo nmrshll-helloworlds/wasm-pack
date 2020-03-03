@@ -9,13 +9,6 @@ async function loadLibProm(): Promise<
 }
 loadLibProm(); // this somehow starts running the promise ?? wut ? Anyways that's what we want
 
-setTimeout(() => {
-  let seed = SeedPhrase.new_random();
-  console.log({ seed });
-  let kp = KeyPair.from_phrase(seed.phrase);
-  console.log({ kp });
-}, 500);
-
 export class KeyPair {
   bytes: Uint8Array;
   constructor(bytes: Uint8Array) {
@@ -23,24 +16,20 @@ export class KeyPair {
   }
 
   static from_phrase(phrase: string): KeyPair {
-    // const libEd = await loadLibProm();
     let kp_bytes: Uint8Array = utils.copyUint8Array(libEd.gen_keypair(phrase));
     return new KeyPair(kp_bytes);
   }
 
   pubKey(): Uint8Array {
-    // const libEd = loadLibProm();
     return utils.copyUint8Array(libEd.pubKey_from_pair_bytes(this.bytes));
   }
 
   // sign returns the signature only
   sign(message: Uint8Array): Uint8Array {
-    // const libEd = loadLibProm();
     return utils.copyUint8Array(libEd.sign(message, this.bytes));
   }
   // if valid signature, returns true
   verify(message: Uint8Array, signature: Uint8Array): boolean {
-    // const libEd = loadLibProm();
     return libEd.verify(message, this.pubKey(), signature);
   }
 
